@@ -31,16 +31,15 @@ const App = () => {
       </ul>
     </div>
   );
+  //render database data to client
 const body = document.querySelector('body');
 const log = document.querySelector('#log');
 log.onchange = () =>{
   const feedLog = log.value;
   fetch('http://localhost:3000', {
     method: 'POST',
-    // headers: {
-    //   'Content-Type': 'application/json',
-    // },
-    // body: JSON.stringify({ feedLog : feedLog }),
+    
+    //body: JSON.stringify({  :  }),
   })
   .then(res => res.json())
   .then(data => {

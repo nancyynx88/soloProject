@@ -3,8 +3,8 @@ const app = express();
 const path = require('path');
 const PORT = 3000;
 const mongoose = require('mongoose');
-
-const controller = require('controller');
+app.use(express.json());
+const controller = require('./controller');
 
 const mongoURI = 'mongodb+srv://naixinyang:8871188711@cluster0.zsizchb.mongodb.net/?retryWrites=true&w=majority';
 mongoose.connect(mongoURI,{
@@ -22,11 +22,11 @@ mongoose.connect(mongoURI,{
     console.log('Error connecting to MongoDB:', err);
   });
 //user read log, server get data from database
-app.get('/', controller.getFeed, (req, res)=>{
+app.get('/api', controller.getFeed, (req, res)=>{
     return res.status(200).json({});
 })
 // user create, server put timestamp frontend to the database
-app.post('/', controller.postFeed, (req, rest) =>{
+app.post('/api', controller.postFeed, (req, res) =>{
 return res.status(200).json(res.locals.log);
 })
 
@@ -42,7 +42,7 @@ app.use((err, req, res, next) => {
         message: { err: 'An error occurred'},
     };
     const errorObj = Object.assign({}, defaultErr, err);
-    console.log(erorObj.log);
+    console.log(errorObj.log);
     return res.status(errorObj.status).json(errorObj.message);
 });
 
