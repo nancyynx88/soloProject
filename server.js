@@ -10,17 +10,10 @@ const mongoURI = 'mongodb+srv://naixinyang:8871188711@cluster0.zsizchb.mongodb.n
 mongoose.connect(mongoURI,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
-  
-    dbName: 'logs',
-  });
-
-  mongoose.connection.on('connected', () => {
-    console.log('Connected to MongoDB');
-  });
-  
-  mongoose.connection.on('error', (err) => {
-    console.log('Error connecting to MongoDB:', err);
-  });
+    dbName: 'feedLogs',
+  }).then(() => console.log('Connected to Mongo DB.'))
+     .catch((err) => console.log(err));
+     
 //user read log, server get data from database
 app.get('/api', controller.getFeed, (req, res)=>{
     return res.status(200).json({});
